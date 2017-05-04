@@ -67,6 +67,9 @@ void App::mouseDrag(float x, float y){
 void App::keyPress(unsigned char key) {
     if (key == 27) {
         // Exit the app when Esc key is pressed
+        for (int i = 0; i < obstacles.size(); i++) {
+            delete obstacles[i];
+        }
         exit(0);
     }
     else if (key == ' ' && jCounter == 0) {
@@ -91,6 +94,25 @@ void App::keyPress(unsigned char key) {
 
 void App::idle() {
     if (loop) {
+        for (int i = 0; i < obstacles.size(); i++) {
+            if (obstacles[i]->contains(p->getX(), p->getY())) {
+                gameover = true;
+                break;
+            }
+            
+            float x = obstacles[i]->getX();
+            obstacles[i]->setX(x - 0.01f);
+            
+            if (obstacles[i]->isLand() && obstacles[i]->getX() <= p->getX() && p->getY()-obstacles[i]->getY() <= 0.1) {
+                p->shouldLand = false;
+            }
+            
+            if (x < -1) {
+                // Delete obstacle once it goes off the screen
+                obstacles.erase(obstacles.begin());
+            }
+        }
+        
         if (p->shouldJump && p->getY() - playerY >= 0.2f) {
             p->shouldJump = false;
             p->shouldLand = true;
@@ -105,25 +127,6 @@ void App::idle() {
         }
         else if (p->shouldLand) {
             p->setY(p->getY() - 0.0075f);
-        }
-        
-        for (int i = 0; i < obstacles.size(); i++) {
-            if (obstacles[i]->isLand() && obstacles[i]->getX() <= p->getX() && p->getY()-obstacles[i]->getY() <= 0.1) {
-                p->shouldLand = false;
-            }
-            
-            if (obstacles[i]->contains(p->getX(), p->getY())) {
-                gameover = true;
-                break;
-            }
-            
-            float x = obstacles[i]->getX();
-            obstacles[i]->setX(x - 0.01f);
-            
-            if (x < -1) {
-                // Delete obstacle once it goes off the screen
-                obstacles.erase(obstacles.begin());
-            }G
         }
     
         if (gameover) {

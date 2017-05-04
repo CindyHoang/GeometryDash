@@ -22,7 +22,7 @@ void Obstacle::draw() {
 }
 
 bool Obstacle::contains(float xx, float yy) {
-    if ((x >= xx && x <= xx+0.1 && y > yy) || !isLandable)
+    if ((x >= xx && x <= xx+0.1 && y >= yy))
         return true;
     return false;
 }
