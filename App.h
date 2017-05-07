@@ -27,6 +27,7 @@ class App: public GlutApp {
     float score;
     
     vector<Obstacle*> obstacles;
+    vector<Powerup*> powerups;
     
     char pts[25];
 public:

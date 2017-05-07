@@ -1,6 +1,6 @@
 #include "App.h"
 
-// TODO: Make player rotate while jumping, insert moving autonomous map?
+// TODO: Fix where player goes from higher to lower platform
 App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w, h){
     // Initialize state variables
     mx = 0.0;
@@ -32,9 +32,10 @@ void App::loadObstacles() {
     for (int i = 0; i < 5; i++) {
         obstacles.push_back(new Obstacle(1.2+(0.1*i), -0.3));
     }
-//    for (int i = 0; i < 5; i++) {
-//        obstacles.push_back(new Obstacle(1.5+(0.1*i), -0.3));
-//    }
+    powerups.push_back(new Powerup(0.7, -0.4));
+    for (int i = 0; i < 5; i++) {
+        obstacles.push_back(new Obstacle(1.9+(0.1*i), -0.5));
+    }
 //    for (int i = 0; i < 5; i++) {
 //        obstacles.push_back(new Obstacle(2+(0.1*i), -0.2));
 //    }
@@ -53,13 +54,20 @@ void App::draw() {
     
     // Set Color
     glColor3d(1.0, 1.0, 1.0);
+    
+    // Display score
     drawString(GLUT_BITMAP_HELVETICA_18, "Score: ", -0.75, 0.75, 0);
     drawString(GLUT_BITMAP_HELVETICA_18, pts, -0.5, 0.75, 0);
     sprintf(pts, "%.1f", score);
+    
     p->draw();
     
     for (int i = 0; i < obstacles.size(); i++) {
         obstacles[i]->draw();
+    }
+    
+    for (int i = 0; i < powerups.size(); i++) {
+        powerups[i]->draw();
     }
 
     // We have been drawing everything to the back buffer
@@ -106,6 +114,7 @@ void App::keyPress(unsigned char key) {
         p->shouldJump = false;
         p->shouldLand = false;
         obstacles.clear();
+        powerups.clear();
         loadObstacles();
         loop = true;
         gameover = false;
@@ -161,6 +170,21 @@ void App::idle() {
             }
         }
         
+        for (int i = 0; i < powerups.size(); i++) {
+            float x = powerups[i]->getX();
+            
+            if (powerups[i]->contains(p->getX(), p->getY())) {
+                powerups.erase(powerups.begin());
+            }
+            
+            powerups[i]->setX(x - 0.01f);
+            
+            if (x < -1) {
+                powerups.erase(powerups.begin());
+            }
+            
+        }
+        
         if (p->shouldJump) {
             hasLanded = false;
             p->setY(p->getY() + 0.01f);
@@ -181,4 +205,8 @@ void App::idle() {
 
 App::~App() {
     delete p;
+    for (int i = 0; i < obstacles.size(); i++) {
+        delete obstacles[i];
+    }
+    obstacles.clear();
 }
