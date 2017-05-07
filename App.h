@@ -27,8 +27,8 @@ class App: public GlutApp {
     float score;
     
     vector<Obstacle*> obstacles;
-    char hi[25];
-    char txt[25];
+    
+    char pts[25];
 public:
     // Constructor, to initialize state
     App(const char* label, int x, int y, int w, int h);
