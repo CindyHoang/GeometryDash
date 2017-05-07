@@ -22,7 +22,7 @@ void Obstacle::draw() {
 }
 
 bool Obstacle::contains(float xx, float yy) {
-    if ((x >= xx && x <= xx+0.1 && y+0.01 >= yy && y-0.1f <= yy))
+    if ((x >= xx && x < xx+0.1f && y >= yy && y-0.1f < yy))
         return true;
     return false;
 }

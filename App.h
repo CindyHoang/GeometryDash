@@ -18,6 +18,8 @@ class App: public GlutApp {
     float mx;
     float my;
     
+    int welcome;
+    
     float playerY;
     
     bool loop;

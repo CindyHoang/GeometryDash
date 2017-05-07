@@ -8,6 +8,8 @@ App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w,
     
     p = new Player(-0.5f, -0.5f);
     
+    welcome = 0;
+    
     loop = true;
     hasLanded = true;
     
@@ -55,21 +57,26 @@ void App::draw() {
     // Set Color
     glColor3d(1.0, 1.0, 1.0);
     
-    // Display score
-    drawString(GLUT_BITMAP_HELVETICA_18, "Score: ", -0.75, 0.75, 0);
-    drawString(GLUT_BITMAP_HELVETICA_18, pts, -0.5, 0.75, 0);
-    sprintf(pts, "%.1f", score);
+    if (welcome != 0) {
+        // Display score
+        drawString(GLUT_BITMAP_HELVETICA_18, "Score: ", -0.75, 0.75, 0);
+        drawString(GLUT_BITMAP_HELVETICA_18, pts, -0.5, 0.75, 0);
+        sprintf(pts, "%.1f", score);
     
-    p->draw();
+        p->draw();
     
-    for (int i = 0; i < obstacles.size(); i++) {
-        obstacles[i]->draw();
+        for (int i = 0; i < obstacles.size(); i++) {
+            obstacles[i]->draw();
+        }
+    
+        for (int i = 0; i < powerups.size(); i++) {
+            powerups[i]->draw();
+        }
     }
-    
-    for (int i = 0; i < powerups.size(); i++) {
-        powerups[i]->draw();
+    else {
+        drawString(GLUT_BITMAP_HELVETICA_18, "Geometry Dash", -0.2, 0, 0);
+        drawString(GLUT_BITMAP_HELVETICA_12, "Press any key to begin", -0.2, -0.1, 0);
     }
-
     // We have been drawing everything to the back buffer
     // Swap the buffers to see the result of what we drew
     glFlush();
@@ -80,7 +87,20 @@ void App::mouseDown(float x, float y){
     // Update app state
     mx = x;
     my = y;
-    
+
+    if (welcome == 0) {
+        welcome = 1;
+        p->setY(-0.5f);
+        hasLanded = true;
+        p->shouldJump = false;
+        p->shouldLand = false;
+        obstacles.clear();
+        powerups.clear();
+        loadObstacles();
+        loop = true;
+        gameover = false;
+        score = 0;
+    }
     // Redraw the scene
     redraw();
 }
@@ -120,6 +140,20 @@ void App::keyPress(unsigned char key) {
         gameover = false;
         score = 0;
     }
+    
+    if (welcome == 0) {
+        welcome = 1;
+        p->setY(-0.5f);
+        hasLanded = true;
+        p->shouldJump = false;
+        p->shouldLand = false;
+        obstacles.clear();
+        powerups.clear();
+        loadObstacles();
+        loop = true;
+        gameover = false;
+        score = 0;
+    }
     redraw();
 }
 
@@ -142,7 +176,6 @@ void App::idle() {
             
             if (x < -0.5) {
                 p->shouldLand = true;
-                
             }
             
             if (p->shouldJump && p->getY() - playerY >= 0.2f) {
@@ -155,6 +188,7 @@ void App::idle() {
                 // If player is currently attempting to land, and has reached the floor
                 if (x < -0.5) {
                     hasLanded = false;
+                    p->shouldLand = true;
                 }
                 else if (obstacles.size() && p->getY() <= playerY+0.01) {
                     hasLanded = true;
