@@ -19,7 +19,7 @@ void App::loadObstacles() {
         obstacles.push_back(new Obstacle(0.5+(0.1*i), -0.5));
     }
     for (int i = 0; i < 5; i++) {
-        obstacles.push_back(new Obstacle(1.2+(0.1*i), -0.4));
+        obstacles.push_back(new Obstacle(1.2+(0.1*i), -0.3));
     }
 //    for (int i = 0; i < 5; i++) {
 //        obstacles.push_back(new Obstacle(1.5+(0.1*i), -0.3));
