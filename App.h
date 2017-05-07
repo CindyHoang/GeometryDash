@@ -3,9 +3,11 @@
 
 #include "GlutApp.h"
 #include "Player.h"
+#include "Powerup.h"
 #include "Obstacle.h"
 #include <vector>
 #include <iostream>
+#include <string>
 
 using namespace std;
 class App: public GlutApp {
@@ -22,7 +24,11 @@ class App: public GlutApp {
     bool gameover;
     bool hasLanded;
     
+    float score;
+    
     vector<Obstacle*> obstacles;
+    char hi[25];
+    char txt[25];
 public:
     // Constructor, to initialize state
     App(const char* label, int x, int y, int w, int h);

@@ -12,6 +12,17 @@ App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w,
     hasLanded = true;
     
     loadObstacles();
+    
+    score = 0.0;
+}
+
+void drawString (void * font, char * s, float x, float y, float z) {
+    unsigned int i;
+    glRasterPos3f(x, y, z);
+    
+    for (i = 0; i < strlen(s); i++) {
+        glutBitmapCharacter(font, s[i]);
+    }
 }
 
 void App::loadObstacles() {
@@ -42,12 +53,15 @@ void App::draw() {
     
     // Set Color
     glColor3d(1.0, 1.0, 1.0);
-    
+    drawString(GLUT_BITMAP_HELVETICA_18, "Score: ", -0.75, 0.75, 0);
+    drawString(GLUT_BITMAP_HELVETICA_18, hi, -0.5, 0.75, 0);
+    sprintf(hi, "%.1f", score);
     p->draw();
     
     for (int i = 0; i < obstacles.size(); i++) {
         obstacles[i]->draw();
     }
+
     // We have been drawing everything to the back buffer
     // Swap the buffers to see the result of what we drew
     glFlush();
@@ -95,6 +109,7 @@ void App::keyPress(unsigned char key) {
         loadObstacles();
         loop = true;
         gameover = false;
+        score = 0;
     }
     redraw();
 }
@@ -139,7 +154,7 @@ void App::idle() {
             }
  
             obstacles[i]->setX(x - 0.01f);
-
+            score += 0.01;
             if (x < -1) {
                 // Delete obstacle once it goes off the screen
                 obstacles.erase(obstacles.begin());
