@@ -18,10 +18,9 @@ class App: public GlutApp {
     
     float playerY;
     
-    int jCounter;
-    
     bool loop;
     bool gameover;
+    bool hasLanded;
     
     vector<Obstacle*> obstacles;
 public:

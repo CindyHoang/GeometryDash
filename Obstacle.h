@@ -1,4 +1,4 @@
-//
+ //
 //  Obstacle.h
 //  glutapp
 //
