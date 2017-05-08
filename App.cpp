@@ -58,19 +58,26 @@ void App::draw() {
     glColor3d(1.0, 1.0, 1.0);
     
     if (welcome != 0) {
-        // Display score
-        drawString(GLUT_BITMAP_HELVETICA_18, "Score: ", -0.75, 0.75, 0);
-        drawString(GLUT_BITMAP_HELVETICA_18, pts, -0.5, 0.75, 0);
-        sprintf(pts, "%.1f", score);
-    
-        p->draw();
-    
-        for (int i = 0; i < obstacles.size(); i++) {
-            obstacles[i]->draw();
+        if (gameover) {
+            drawString(GLUT_BITMAP_HELVETICA_18, "Gameover :(", -0.175, 0, 0);
+            drawString(GLUT_BITMAP_HELVETICA_12, "Press 'r' to restart the game", -0.25, -0.1, 0);
         }
+        
+        else {
+            // Display score
+            drawString(GLUT_BITMAP_HELVETICA_18, "Score: ", -0.75, 0.75, 0);
+            drawString(GLUT_BITMAP_HELVETICA_18, pts, -0.5, 0.75, 0);
+            sprintf(pts, "%.1f", score);
     
-        for (int i = 0; i < powerups.size(); i++) {
-            powerups[i]->draw();
+            p->draw();
+    
+            for (int i = 0; i < obstacles.size(); i++) {
+                obstacles[i]->draw();
+            }
+    
+            for (int i = 0; i < powerups.size(); i++) {
+                powerups[i]->draw();
+            }
         }
     }
     else {
