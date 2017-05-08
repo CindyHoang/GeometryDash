@@ -16,6 +16,7 @@ App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w,
     loadObstacles();
     
     score = 0.0;
+    delay = 5.0;
 }
 
 void drawString (void * font, char * s, float x, float y, float z) {
@@ -28,16 +29,21 @@ void drawString (void * font, char * s, float x, float y, float z) {
 }
 
 void App::loadObstacles() {
-    for (int i = 0; i < 5; i++) {
-        obstacles.push_back(new Obstacle(0.5+(0.1*i), -0.5));
-    }
-    for (int i = 0; i < 5; i++) {
-        obstacles.push_back(new Obstacle(1.2+(0.1*i), -0.3));
-    }
-    powerups.push_back(new Powerup(0.7, -0.4));
-    for (int i = 0; i < 5; i++) {
-        obstacles.push_back(new Obstacle(1.9+(0.1*i), -0.5));
-    }
+    obstacles.push_back(new Obstacle(0.5, -0.5));
+//    for (int i = 0; i < 20; i++) {
+//        obstacles.push_back(new Obstacle(0.7+(0.2*i), -0.5+(0.1*i)));
+//    }
+//    for (int i = 0; i < 5; i++) {
+//        obstacles.push_back(new Obstacle(0.5+(0.1*i), -0.5));
+//    }
+//    for (int i = 0; i < 5; i++) {
+//        obstacles.push_back(new Obstacle(1.2+(0.1*i), -0.3));
+//    }
+//    powerups.push_back(new Powerup(0.7, -0.4));
+//    powerups.push_back(new Powerup(1.5, -0.2, 1));
+//    for (int i = 0; i < 5; i++) {
+//        obstacles.push_back(new Obstacle(1.9+(0.1*i), -0.5));
+//    }
 //    for (int i = 0; i < 5; i++) {
 //        obstacles.push_back(new Obstacle(2+(0.1*i), -0.2));
 //    }
@@ -124,15 +130,15 @@ void App::mouseDrag(float x, float y){
 void App::keyPress(unsigned char key) {
     if (key == 27) {
         // Exit the app when Esc key is pressed
-        for (int i = 0; i < obstacles.size(); i++) {
-            delete obstacles[i];
-        }
         exit(0);
     }
     else if (key == ' ' && hasLanded) {
         // Jump :D
-        playerY = p->getY();
-        p->jump();
+//        if (delay >= 5.0) {
+            delay = 0;
+            playerY = p->getY();
+            p->jump();
+//        }
     }
     else if (key == 'r') {
         // Reset the game
@@ -140,6 +146,7 @@ void App::keyPress(unsigned char key) {
         hasLanded = true;
         p->shouldJump = false;
         p->shouldLand = false;
+        p->resetColor();
         obstacles.clear();
         powerups.clear();
         loadObstacles();
@@ -154,6 +161,7 @@ void App::keyPress(unsigned char key) {
         hasLanded = true;
         p->shouldJump = false;
         p->shouldLand = false;
+        p->resetColor();
         obstacles.clear();
         powerups.clear();
         loadObstacles();
@@ -166,6 +174,15 @@ void App::keyPress(unsigned char key) {
 
 void App::idle() {
     if (loop) {
+        delay += 0.1f;
+        float jumpHeight;
+        
+        if (p->getR() == 1) {
+            jumpHeight = 0.3f;
+        }
+        else {
+            jumpHeight = 0.2f;
+        }
         for (int i = 0; i < obstacles.size(); i++) {
             float x = obstacles[i]->getX();
             
@@ -175,17 +192,18 @@ void App::idle() {
                 break;
             }
             
-            if (obstacles[i]->isLand() && (obstacles[i]->getX() - p->getX() <= 0.1f) && (p->getY() - obstacles[i]->getY() <= 0.1f)) {
+            if (obstacles[i]->isLand() && (obstacles[i]->getX() - p->getX() <= p->getS()) && (p->getY() - obstacles[i]->getY() <= p->getS())) {
                 // If the terrain is landable, and the position is correct, we should land
                 hasLanded = true;
                 p->shouldLand = false;
             }
             
-            if (x < -0.5) {
+            if (x < p->getX()) {
+                // If the obstacle has passed the player, we should be able to fall
                 p->shouldLand = true;
             }
             
-            if (p->shouldJump && p->getY() - playerY >= 0.2f) {
+            if (p->shouldJump && p->getY() - playerY >= jumpHeight) {
                 // Setting max height for the jump
                 hasLanded = false;
                 p->shouldJump = false;
@@ -193,7 +211,7 @@ void App::idle() {
             }
             else if (p->shouldLand) {
                 // If player is currently attempting to land, and has reached the floor
-                if (x < -0.5) {
+                if (x < p->getX()) {
                     hasLanded = false;
                     p->shouldLand = true;
                 }
@@ -205,6 +223,7 @@ void App::idle() {
  
             obstacles[i]->setX(x - 0.01f);
             score += 0.01;
+            
             if (x < -1) {
                 // Delete obstacle once it goes off the screen
                 obstacles.erase(obstacles.begin());
@@ -214,11 +233,12 @@ void App::idle() {
         for (int i = 0; i < powerups.size(); i++) {
             float x = powerups[i]->getX();
             
+            powerups[i]->setX(x - 0.01f);
+            
             if (powerups[i]->contains(p->getX(), p->getY())) {
+                p->setColor(powerups[i]->getR(), powerups[i]->getG(), powerups[i]->getB());
                 powerups.erase(powerups.begin());
             }
-            
-            powerups[i]->setX(x - 0.01f);
             
             if (x < -1) {
                 powerups.erase(powerups.begin());

@@ -8,6 +8,7 @@
 #include <vector>
 #include <iostream>
 #include <string>
+#include <math.h>
 
 using namespace std;
 class App: public GlutApp {
@@ -27,6 +28,7 @@ class App: public GlutApp {
     bool hasLanded;
     
     float score;
+    float delay;
     
     vector<Obstacle*> obstacles;
     vector<Powerup*> powerups;

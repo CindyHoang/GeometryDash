@@ -26,3 +26,8 @@ bool Obstacle::contains(float xx, float yy) {
         return true;
     return false;
 }
+
+void Obstacle::fire() {
+    missile = true;
+}
+

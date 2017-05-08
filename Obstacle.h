@@ -23,8 +23,10 @@ class Obstacle {
     float r, g, b;
     bool isLandable;
 public:
+    bool missile;
     Obstacle(float xx = 0, float yy = 0, bool canLand = true, float ww = 0.1, float hh = 0.1, float rr = 1, float gg = 0, float bb = 0) :
         x(xx), y(yy), isLandable(canLand), w(ww), h(hh), r(rr), g(gg), b(bb) {
+            missile = false;
     }
     
     float getX() const { return x; }
@@ -45,8 +47,18 @@ public:
     bool isLand() const { return isLandable; }
     
     virtual bool contains(float x, float y);
+    virtual void fire();
     virtual void draw();
     virtual ~Obstacle() {}
+};
+
+class Enemy: public Obstacle{
+    float x, y;
+    float w, h;
+    float r, g, b;
+    bool isLandable = false;
+    
+    
 };
 
 #endif /* Obstacle_h */
