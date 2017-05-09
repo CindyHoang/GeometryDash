@@ -36,6 +36,30 @@ void App::loadObstacles() {
 //    }
     
     obstacles.push_back(new Triangle(0.5, -0.5));
+    obstacles.push_back(new Triangle(1.5, -0.5));
+    obstacles.push_back(new Triangle(1.6, -0.5));
+    for (int i = 0; i < 5; i++) {
+        obstacles.push_back(new Obstacle(2.5+(0.1*i), -0.5));
+    }
+    for (int i = 0; i < 3; i++) {
+        obstacles.push_back(new Triangle(3.025+(0.1*i), -0.5));
+    }
+    for (int i = 0; i < 5; i++) {
+        obstacles.push_back(new Obstacle(3.35+(0.1*i), -0.5));
+    }
+    for (int i = 0; i < 2; i++) {
+        obstacles.push_back(new Obstacle(5+(0.1*i), -0.5));
+    }
+    for (int i = 0; i < 2; i++) {
+        obstacles.push_back(new Obstacle(5.5+(0.1*i), -0.4));
+    }
+    for (int i = 0; i < 2; i++) {
+        obstacles.push_back(new Obstacle(6+(0.1*i), -0.5));
+    }
+//    for (int i = 0; i < 3; i++) {
+//        obstacles.push_back(new Obstacle(4.2+(0.1*i), -0.5+(0.2*i)));
+//        obstacles.push_back(new Obstacle(4.2+(0.2*i), -0.5+(0.2*i)));
+//    }
 //    for (int i = 0; i < 5; i++) {
 //        obstacles.push_back(new Obstacle(0.5+(0.1*i), -0.5));
 //    }
@@ -44,9 +68,6 @@ void App::loadObstacles() {
 //    }
 //    powerups.push_back(new Powerup(0.7, -0.4));
 //    powerups.push_back(new Powerup(1.5, -0.2, 1));
-    for (int i = 0; i < 5; i++) {
-        obstacles.push_back(new Obstacle(1.9+(0.1*i), -0.5));
-    }
 //    for (int i = 0; i < 5; i++) {
 //        obstacles.push_back(new Obstacle(2+(0.1*i), -0.2));
 //    }
@@ -178,7 +199,7 @@ void App::keyPress(unsigned char key) {
 void App::idle() {
     if (loop) {
 //        delay += 0.1f;
-        float jumpHeight = 0.2f;
+        float jumpHeight = 0.25f;
         
 //        if (p->getR() == 1) {
 //            jumpHeight = 0.3f;
@@ -208,19 +229,10 @@ void App::idle() {
                 }
             }
             
-            if (x+0.1f < p->getX()) {
+            if (obstacles[i]->getX()+0.1f < p->getX()) {
                 // If the obstacle has passed the player, we should be able to fall
-//                int k = i + 1;
-//                if (obstacles.size() > k) {
-//                    if (obstacles[i]->getY() != obstacles[k]->getY()) {
-//                        p->shouldLand = true;
-//                        obstacles[i]->passedUser = true;
-//                    }
-//                }
-//                else if (obstacles.size() == 1) {
-                    p->shouldLand = true;
-                    obstacles[i]->passedUser = true;
-//                }
+                p->shouldLand = true;
+                obstacles[i]->passedUser = true;
             }
             
             if (p->shouldJump && p->getY() - playerY >= jumpHeight) {
@@ -235,7 +247,7 @@ void App::idle() {
                     hasLanded = false;
                     p->shouldLand = true;
                 }
-                else if (obstacles.size() && p->getY() <= playerY) {
+                else if (obstacles.size() && p->getY() <= -0.5f) {
                     hasLanded = true;
                     p->shouldLand = false;
                 }
@@ -279,12 +291,12 @@ void App::idle() {
     
         if (p->shouldJump) {
             hasLanded = false;
-            p->setY(p->getY() + 0.01f);
+            p->setY(p->getY() + 0.0125f);
         }
         else if (p->shouldLand) {
             if (p->getY() > -0.5) {
                 hasLanded = false;
-                p->setY(p->getY() - 0.01f);
+                p->setY(p->getY() - 0.0125f);
             }
         }
         
