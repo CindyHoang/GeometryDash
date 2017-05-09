@@ -1,9 +1,9 @@
-//
+ //
 //  Obstacle.h
 //  glutapp
 //
 //  Created by Cindy Hoang on 5/3/17.
-//  Copyright © 2017 Angelo Kyrilov. All rights reserved.
+//  Copyright Â© 2017 Angelo Kyrilov. All rights reserved.
 //
 
 #ifndef Obstacle_h
@@ -18,55 +18,64 @@
 #endif
 
 class Obstacle {
+    float x, y;
+    float w, h;
+    float r, g, b;
+    bool isLandable;
+public:
+	bool missle;
+    Obstacle(float xx = 0, float yy = 0, bool canLand = true, float ww = 0.1, float hh = 0.1, float rr = 1, float gg = 0, float bb = 0) :
+        x(xx), y(yy), isLandable(canLand), w(ww), h(hh), r(rr), g(gg), b(bb) {
+		
+    }
+    
+    float getX() const { return x; }
+    float getY() const { return y; }
+    void setX(float xx) { x = xx; }
+    void setY(float yy) { y = yy; }
+    
+    float getW() const { return w; }
+    float getH() const { return h; }
+    void setW(float ww) { w = ww; }
+    void setH(float hh) { h = hh; }
+    
+    float getR() const { return r; }
+    float getG() const { return g; }
+    float getB() const { return b; }
+    void setColor(float rr, float gg, float bb) { r = rr; g = gg; b = bb; }
+    
+    bool isLand() const { return isLandable; }
+    
+    virtual bool contains(float x, float y);
+    virtual void draw();
+	virtual void fire();
+    virtual ~Obstacle() {}
+};
+
+class Enemy : public Obstacle {
 	float x, y;
 	float w, h;
 	float r, g, b;
-	bool isLandable;
-	
-	
-	
-
 public:
-	bool missle;
-
-	Obstacle(float xx = 0, float yy = 0, bool canLand = true, float ww = 0.1, float hh = 0.1, float rr = 1, float gg = 0, float bb = 0) :
-		x(xx), y(yy), isLandable(canLand), w(ww), h(hh), r(rr), g(gg), b(bb) {
-		
+	Enemy(float xx = 0, float yy = 0, float ww = 0.1, float hh = 0.1, float rr = 1, float gg = 1, float bb = 1) :
+		x(xx), y(yy), w(ww), h(hh), r(rr), g(gg), b(bb) {
 		missle = false;
 	}
+		float getX() const { return x; }
+		float getY() const { return y; }
+		void setX(float xx) { x = xx; }
+		void setY(float yy) { y = yy; }
 
-	
+		float getW() const { return w; }
+		float getH() const { return h; }
+		void setW(float ww) { w = ww; }
+		void setH(float hh) { h = hh; }
 
-	float getX() const { return x; }
-	float getY() const { return y; }
-	void setX(float xx) { x = xx; }
-	void setY(float yy) { y = yy; }
-
-	float getW() const { return w; }
-	float getH() const { return h; }
-	void setW(float ww) { w = ww; }
-	void setH(float hh) { h = hh; }
-
-	float getR() const { return r; }
-	float getG() const { return g; }
-	float getB() const { return b; }
-	void setColor(float rr, float gg, float bb) { r = rr; g = gg; b = bb; }
-
-	bool isLand() const { return isLandable; }
-
-	virtual bool contains(float x, float y);
-	virtual void draw();
-	virtual void fire();
-	virtual ~Obstacle() {}
-};
-
-class Enemy: public Obstacle{
-	float x, y; 
-	float w, h;
-	float r, g, b;
-	bool isLandable = false;
-	
+		float getR() const { return r; }
+		float getG() const { return g; }
+		float getB() const { return b; }
+		void setColor(float rr, float gg, float bb) { r = rr; g = gg; b = bb; }
 
 };
+
 #endif /* Obstacle_h */
-#pragma once

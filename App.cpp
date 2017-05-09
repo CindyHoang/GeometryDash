@@ -7,6 +7,7 @@ App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w,
     my = 0.0;
     
     p = new Player(-0.5f, -0.5f);
+	e = new Obstacle(0.0f, -0.4f, 1, .1f, 0.01f, 1.0f, 0.0f, 1.0f);
     
     welcome = 0;
     
@@ -28,19 +29,24 @@ void drawString (void * font, char * s, float x, float y, float z) {
 }
 
 void App::loadObstacles() {
-    for (int i = 0; i < 5; i++) {
+	enemy.push_back(new Obstacle(1.0, -0.4, 0, 0.1f, 0.1f, 1.0f, 1.0f, 1.0f));
+	enemy.push_back(new Obstacle(2.0, -0.2, 0, 0.1f, 0.1f, 1.0f, 1.0f, 1.0f));
+
+	for (int i = 0; i < 5; i++) {
         obstacles.push_back(new Obstacle(0.5+(0.1*i), -0.5));
     }
     for (int i = 0; i < 5; i++) {
-        obstacles.push_back(new Obstacle(1.2+(0.1*i), -0.3));
+        obstacles.push_back(new Obstacle(1.0+(0.1*i), -0.3));
     }
+	for (int i = 0; i < 5; i++) {
+		obstacles.push_back(new Obstacle(1.6 + (0.1*i), -0.3));
+	}
+	for (int i = 0; i < 5; i++) {
+		obstacles.push_back(new Obstacle(2.3 + (0.1*i), -0.5));
+	}
+
     powerups.push_back(new Powerup(0.7, -0.4));
-    for (int i = 0; i < 5; i++) {
-        obstacles.push_back(new Obstacle(1.9+(0.1*i), -0.5));
-    }
-//    for (int i = 0; i < 5; i++) {
-//        obstacles.push_back(new Obstacle(2+(0.1*i), -0.2));
-//    }
+    
 }
 void App::draw() {
 
@@ -70,6 +76,13 @@ void App::draw() {
             sprintf(pts, "%.1f", score);
     
             p->draw();
+			e->draw();
+			
+			for (int i = 0; i < enemy.size(); i++) {
+				enemy[i]->draw();
+				
+			}
+			
     
             for (int i = 0; i < obstacles.size(); i++) {
                 obstacles[i]->draw();
@@ -102,6 +115,8 @@ void App::mouseDown(float x, float y){
         p->shouldJump = false;
         p->shouldLand = false;
         obstacles.clear();
+		enemy.clear();
+		e->missle= true;
         powerups.clear();
         loadObstacles();
         loop = true;
@@ -141,6 +156,8 @@ void App::keyPress(unsigned char key) {
         p->shouldJump = false;
         p->shouldLand = false;
         obstacles.clear();
+		enemy.clear();
+		e->missle = true;
         powerups.clear();
         loadObstacles();
         loop = true;
@@ -155,6 +172,8 @@ void App::keyPress(unsigned char key) {
         p->shouldJump = false;
         p->shouldLand = false;
         obstacles.clear();
+		enemy.clear();
+		e->missle = true;
         powerups.clear();
         loadObstacles();
         loop = true;
@@ -166,6 +185,7 @@ void App::keyPress(unsigned char key) {
 
 void App::idle() {
     if (loop) {
+		//obstacles
         for (int i = 0; i < obstacles.size(); i++) {
             float x = obstacles[i]->getX();
             
@@ -211,6 +231,73 @@ void App::idle() {
             }
         }
         
+		//enemies
+		for (int i = 0; i < enemy.size(); i++) {
+			float x = enemy[i]->getX();
+			float y = enemy[i]->getY();
+			//missles
+			enemy[i]->missle = true;
+
+			if (e->missle) {
+				missleX = enemy[i]->getX();
+				missleY = enemy[i]->getY() - .5f;
+				e->fire();
+				cout << missleY << endl;
+			}
+			if (enemy[i]->missle) {
+				missleX += -.018f;
+
+			}
+			if (missleX > -1) {
+				e->missle = false;
+			}
+			else
+				e->fire();
+
+			if (e->contains(p->getX(), p->getY())) {
+				gameover = true;
+				break;
+			}
+
+			if (enemy[i]->contains(p->getX(), p->getY())) {
+				// Collision check
+				gameover = true;
+				break;
+			}
+			if (enemy[i]->isLand() && (enemy[i]->getX() - p->getX() <= 0.2f) && (p->getY() - enemy[i]->getY() <= 0.2f)) {
+				// If the terrain is landable, and the position is correct, we should land
+				hasLanded = true;
+				p->shouldLand = false;
+			}
+
+
+			if (p->shouldJump && p->getY() - playerY >= 0.2f) {
+				// Setting max height for the jump
+				hasLanded = false;
+				p->shouldJump = false;
+				p->shouldLand = true;
+			}
+			else if (p->shouldLand) {
+				// If player is currently attempting to land, and has reached the floor
+				if (x < -0.5) {
+					hasLanded = false;
+				}
+			}
+			else if (enemy.size() && p->getY() <= playerY + 0.1) {
+				hasLanded = true;
+				p->shouldLand = false;
+			}
+
+			enemy[i]->setX(x - 0.01f);
+			e->setX(missleX - 0.001f);
+
+			if (x < -1) {
+				// Delete obstacle once it goes off the screen
+				enemy.erase(enemy.begin());
+			}
+		}
+		/*
+		//power ups
         for (int i = 0; i < powerups.size(); i++) {
             float x = powerups[i]->getX();
             
@@ -225,7 +312,7 @@ void App::idle() {
             }
             
         }
-        
+        */
         if (p->shouldJump) {
             hasLanded = false;
             p->setY(p->getY() + 0.01f);

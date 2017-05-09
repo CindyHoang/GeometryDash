@@ -14,6 +14,7 @@ class App: public GlutApp {
     // Maintain app state here
     
     Player* p;
+	Obstacle* e;
     
     float mx;
     float my;
@@ -21,6 +22,8 @@ class App: public GlutApp {
     int welcome;
     
     float playerY;
+	float missleX;
+	float missleY;
     
     bool loop;
     bool gameover;
@@ -29,6 +32,7 @@ class App: public GlutApp {
     float score;
     
     vector<Obstacle*> obstacles;
+	vector<Obstacle*> enemy;
     vector<Powerup*> powerups;
     
     char pts[25];
