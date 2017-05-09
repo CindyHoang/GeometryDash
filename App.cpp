@@ -30,6 +30,7 @@ void drawString (void * font, char * s, float x, float y, float z) {
 
 void App::loadObstacles() {
     obstacles.push_back(new Obstacle(0.5, -0.5));
+    obstacles.push_back(new Triangle(0.7, -0.5));
 //    for (int i = 0; i < 20; i++) {
 //        obstacles.push_back(new Obstacle(0.7+(0.2*i), -0.5+(0.1*i)));
 //    }
@@ -174,15 +175,15 @@ void App::keyPress(unsigned char key) {
 
 void App::idle() {
     if (loop) {
-        delay += 0.1f;
-        float jumpHeight;
+//        delay += 0.1f;
+        float jumpHeight = 0.2f;
         
-        if (p->getR() == 1) {
-            jumpHeight = 0.3f;
-        }
-        else {
-            jumpHeight = 0.2f;
-        }
+//        if (p->getR() == 1) {
+//            jumpHeight = 0.3f;
+//        }
+//        else {
+//            jumpHeight = 0.2f;
+//        }
         for (int i = 0; i < obstacles.size(); i++) {
             float x = obstacles[i]->getX();
             

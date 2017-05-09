@@ -29,23 +29,22 @@ public:
             missile = false;
     }
     
-    float getX() const { return x; }
-    float getY() const { return y; }
-    void setX(float xx) { x = xx; }
-    void setY(float yy) { y = yy; }
+    virtual float getX() const { return x; }
+    virtual float getY() const { return y; }
+    virtual void setX(float xx) { x = xx; }
+    virtual void setY(float yy) { y = yy; }
     
-    float getW() const { return w; }
-    float getH() const { return h; }
-    void setW(float ww) { w = ww; }
-    void setH(float hh) { h = hh; }
+    virtual float getW() const { return w; }
+    virtual float getH() const { return h; }
+    virtual void setW(float ww) { w = ww; }
+    virtual void setH(float hh) { h = hh; }
     
-    float getR() const { return r; }
-    float getG() const { return g; }
-    float getB() const { return b; }
-    void setColor(float rr, float gg, float bb) { r = rr; g = gg; b = bb; }
+    virtual float getR() const { return r; }
+    virtual float getG() const { return g; }
+    virtual float getB() const { return b; }
+    virtual void setColor(float rr, float gg, float bb) { r = rr; g = gg; b = bb; }
     
-    bool isLand() const { return isLandable; }
-    
+    virtual bool isLand() const { return isLandable; }
     virtual bool contains(float x, float y);
     virtual void fire();
     virtual void draw();

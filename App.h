@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "Powerup.h"
 #include "Obstacle.h"
+#include "Triangle.h"
 #include <vector>
 #include <iostream>
 #include <string>
