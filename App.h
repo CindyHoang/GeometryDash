@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "Powerup.h"
 #include "Obstacle.h"
+#include "Enemy.h"
 #include "Triangle.h"
 #include <vector>
 #include <iostream>
@@ -19,6 +20,9 @@ class App: public GlutApp {
     
     float mx;
     float my;
+    
+    float missileX;
+    float missileY;
     
     int welcome;
     

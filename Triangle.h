@@ -33,7 +33,6 @@ public:
     
     bool isLand();
     void draw();
-    bool contains(float x, float y);
     ~Triangle() {}
 };
 #endif /* Triangle_h */

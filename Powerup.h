@@ -55,7 +55,6 @@ public:
     void setColor(float rr, float gg, float bb) { r = rr; g = gg; b = bb; }
     
     virtual void draw();
-    virtual bool contains(float x, float y);
     virtual ~Powerup() {}
 };
 

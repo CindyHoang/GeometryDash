@@ -1,14 +1,14 @@
 //
-//  Powerup.cpp
+//  Enemy.cpp
 //  glutapp
 //
-//  Created by Cindy Hoang on 5/7/17.
+//  Created by Cindy Hoang on 5/8/17.
 //  Copyright © 2017 Angelo Kyrilov. All rights reserved.
 //
 
-#include "Powerup.h"
+#include "Enemy.h"
 
-void Powerup::draw() {
+void Enemy::draw() {
     glColor3f(r, g, b);
     
     glBegin(GL_POLYGON);
@@ -19,4 +19,13 @@ void Powerup::draw() {
     glVertex2f(x, y-h);
     
     glEnd();
+}
+
+bool Enemy::canFire() {
+    return true;
+}
+
+bool Enemy::fire() {
+    missile = true;
+    return missile;
 }

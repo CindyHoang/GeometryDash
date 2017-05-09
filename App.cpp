@@ -17,6 +17,9 @@ App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w,
     
     score = 0.0;
     delay = 5.0;
+    
+    missileX = 0.74;
+    missileY = -0.55;
 }
 
 void drawString (void * font, char * s, float x, float y, float z) {
@@ -36,8 +39,9 @@ void App::loadObstacles() {
 //    }
     
     obstacles.push_back(new Triangle(0.5, -0.5));
-    obstacles.push_back(new Triangle(1.5, -0.5));
-    obstacles.push_back(new Triangle(1.6, -0.5));
+    obstacles.push_back(new Enemy(1.5, -0.5));
+//    obstacles.push_back(new Triangle(1.5, -0.5));
+//    obstacles.push_back(new Triangle(1.6, -0.5));
     for (int i = 0; i < 5; i++) {
         obstacles.push_back(new Obstacle(2.5+(0.1*i), -0.5));
     }
@@ -53,8 +57,14 @@ void App::loadObstacles() {
     for (int i = 0; i < 2; i++) {
         obstacles.push_back(new Obstacle(5.5+(0.1*i), -0.4));
     }
+    for (int i = 0; i < 5; i++) {
+        obstacles.push_back(new Obstacle(6+(0.1*i), -0.3));
+    }
     for (int i = 0; i < 2; i++) {
-        obstacles.push_back(new Obstacle(6+(0.1*i), -0.5));
+        obstacles.push_back(new Obstacle(6.6+(0.1*i), -0.4));
+    }
+    for (int i = 0; i < 2; i++) {
+        obstacles.push_back(new Obstacle(6.9+(0.1*i), -0.5));
     }
 //    for (int i = 0; i < 3; i++) {
 //        obstacles.push_back(new Obstacle(4.2+(0.1*i), -0.5+(0.2*i)));
@@ -103,6 +113,11 @@ void App::draw() {
     
             for (int i = 0; i < obstacles.size(); i++) {
                 obstacles[i]->draw();
+                
+                if (obstacles[i]->canFire() && obstacles[i]->missile && !gameover) {
+                    Obstacle* pew = new Obstacle(missileX, missileY, false, 0.02f, 0.02f, 1, 1, 1);
+                    pew->draw();
+                }
             }
     
             for (int i = 0; i < powerups.size(); i++) {
@@ -167,6 +182,8 @@ void App::keyPress(unsigned char key) {
     else if (key == 'r') {
         // Reset the game
         p->setY(-0.5f);
+        missileX = 0.74;
+        missileY = -0.55;
         hasLanded = true;
         p->shouldJump = false;
         p->shouldLand = false;
@@ -181,6 +198,8 @@ void App::keyPress(unsigned char key) {
     
     if (welcome == 0) {
         welcome = 1;
+        missileX = 0.74;
+        missileY = -0.55;
         p->setY(-0.5f);
         hasLanded = true;
         p->shouldJump = false;
@@ -211,10 +230,24 @@ void App::idle() {
         for (int i = 0; i < obstacles.size(); i++) {
             float x = obstacles[i]->getX();
             
-            if (obstacles[i]->contains(p->getX(), p->getY())) {
+            if (p->contains(obstacles[i]->getX(), obstacles[i]->getY(), obstacles[i]->getW(), obstacles[i]->getH())) {
                 // Collision check
                 gameover = true;
                 break;
+            }
+            
+            if (obstacles[i]->canFire() && obstacles[i]->getX() <= 0.75) {
+                obstacles[i]->missile = true;
+                missileX -= 0.02f;
+            }
+            
+            if (p->contains(missileX, missileY, 0.02f, 0.02f)) {
+                gameover = true;
+                break;
+            }
+            
+            if (missileX < -1) {
+                obstacles[i]->missile = false;
             }
             
             if ((!obstacles[i]->passedUser) && (obstacles[i]->getX() <= p->getX() + p->getS()) && (obstacles[i]->getX() > p->getX()) && (p->getY() > obstacles[i]->getY()+0.09f) && (p->getY() <= obstacles[i]->getY()+0.1f)) {
@@ -252,19 +285,8 @@ void App::idle() {
                     p->shouldLand = false;
                 }
             }
-            
-//            if (p->shouldJump) {
-//                hasLanded = false;
-//                p->setY(p->getY() + 0.0005f);
-//            }
-//            else if (p->shouldLand) {
-//                if (p->getY() > -0.5) {
-//                    hasLanded = false;
-//                    p->setY(p->getY() - 0.0005f);
-//                }
-//            }
  
-            obstacles[i]->setX(x - 0.01f);
+            obstacles[i]->setX(x - 0.0125f);
             score += 0.01;
             
             if (x < -1) {
@@ -278,7 +300,7 @@ void App::idle() {
             
             powerups[i]->setX(x - 0.01f);
             
-            if (powerups[i]->contains(p->getX(), p->getY())) {
+            if (p->contains(powerups[i]->getX(), powerups[i]->getY(), powerups[i]->getW(), powerups[i]->getH())) {
                 p->setColor(powerups[i]->getR(), powerups[i]->getG(), powerups[i]->getB());
                 powerups.erase(powerups.begin());
             }

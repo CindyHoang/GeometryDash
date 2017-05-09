@@ -53,6 +53,7 @@ public:
     void setColor(float rr, float gg, float bb) { r = rr; g = gg; b = bb; }
     void resetColor() { r = 0; g = 1; b = 0; }
     
+    bool contains(float x, float y, float w, float h);
     virtual ~Player() {}
 };
 

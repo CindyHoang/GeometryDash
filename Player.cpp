@@ -24,3 +24,11 @@ void Player::draw() {
 void Player::jump() {
     shouldJump = true;
 }
+
+bool Player::contains(float xx, float yy, float ww, float hh) {
+    if ((x+ww >= xx && x < xx && yy >= y && yy-hh <= y))
+//    if ((x+s >= xx && x < xx && y-s <= yy && y >= yy-hh))
+        return true;
+    return false;
+}
+

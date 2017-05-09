@@ -22,6 +22,7 @@ class Obstacle {
     float w, h;
     float r, g, b;
     bool isLandable;
+    
 public:
     bool missile;
     bool passedUser;
@@ -47,19 +48,9 @@ public:
     virtual void setColor(float rr, float gg, float bb) { r = rr; g = gg; b = bb; }
     
     virtual bool isLand() { return isLandable; }
-    virtual bool contains(float x, float y);
-    virtual void fire();
+    virtual bool canFire();
     virtual void draw();
     virtual ~Obstacle() {}
-};
-
-class Enemy: public Obstacle{
-    float x, y;
-    float w, h;
-    float r, g, b;
-    bool isLandable = false;
-    
-    
 };
 
 #endif /* Obstacle_h */
