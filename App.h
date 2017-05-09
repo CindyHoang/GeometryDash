@@ -35,12 +35,14 @@ class App: public GlutApp {
     bool hasLanded;
     
     float score;
+    float highscore;
     float delay;
     
     vector<Obstacle*> obstacles;
     vector<Powerup*> powerups;
     
     char pts[25];
+    char recordPts[25];
 public:
     // Constructor, to initialize state
     App(const char* label, int x, int y, int w, int h);

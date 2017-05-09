@@ -16,6 +16,7 @@ App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w,
     loadObstacles();
     
     score = 0.0;
+    highscore = 0.0;
     delay = 5.0;
     
     missileX = 0.74;
@@ -139,6 +140,10 @@ void App::draw() {
             drawString(GLUT_BITMAP_HELVETICA_18, "Score: ", -0.75, 0.75, 0);
             drawString(GLUT_BITMAP_HELVETICA_18, pts, -0.5, 0.75, 0);
             sprintf(pts, "%.1f", score);
+            
+            drawString(GLUT_BITMAP_HELVETICA_18, "Highscore: ", 0.25, 0.75, 0);
+            drawString(GLUT_BITMAP_HELVETICA_18, recordPts, 0.6, 0.75, 0);
+            sprintf(recordPts, "%.1f", highscore);
     
             p->draw();
     
@@ -218,6 +223,12 @@ void App::keyPress(unsigned char key) {
     }
     else if (key == 'r') {
         // Reset the game
+        if (score > highscore) {
+            highscore = score;
+        }
+        if (highscore <= 0.3) {
+            highscore = 0.0;
+        }
         p->setY(-0.5f);
         missileX = 0.74;
         missileY = -0.55;
@@ -361,6 +372,9 @@ void App::idle() {
         
         if (gameover) {
             loop = false;
+            if (score > highscore) {
+                highscore = score;
+            }
         }
         redraw();
     }
