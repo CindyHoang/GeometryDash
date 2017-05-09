@@ -26,9 +26,16 @@ void Player::jump() {
 }
 
 bool Player::contains(float xx, float yy, float ww, float hh) {
-    if ((x+ww >= xx && x < xx && yy >= y && yy-hh <= y))
-//    if ((x+s >= xx && x < xx && y-s <= yy && y >= yy-hh))
-        return true;
+    if ((x+s >= xx && x < xx)) {
+        if (y > yy) {
+            if (y-s <= yy-hh && y >= yy)
+                return true;
+        }
+        else {
+            if (yy >= y && yy-hh <= y)
+                return true;
+        }
+    }
     return false;
 }
 

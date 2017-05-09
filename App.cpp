@@ -55,13 +55,13 @@ void App::loadObstacles() {
         obstacles.push_back(new Obstacle(5+(0.1*i), -0.5));
     }
     for (int i = 0; i < 2; i++) {
-        obstacles.push_back(new Obstacle(5.5+(0.1*i), -0.4));
+        obstacles.push_back(new Obstacle(5.5+(0.1*i), -0.35));
     }
     for (int i = 0; i < 5; i++) {
-        obstacles.push_back(new Obstacle(6+(0.1*i), -0.3));
+        obstacles.push_back(new Obstacle(6+(0.1*i), -0.2));
     }
     for (int i = 0; i < 2; i++) {
-        obstacles.push_back(new Obstacle(6.6+(0.1*i), -0.4));
+        obstacles.push_back(new Obstacle(6.6+(0.1*i), -0.35));
     }
     for (int i = 0; i < 2; i++) {
         obstacles.push_back(new Obstacle(6.9+(0.1*i), -0.5));
