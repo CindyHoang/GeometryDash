@@ -226,9 +226,6 @@ void App::keyPress(unsigned char key) {
         if (score > highscore) {
             highscore = score;
         }
-        if (highscore <= 0.3) {
-            highscore = 0.0;
-        }
         p->setY(-0.5f);
         missileX = 0.74;
         missileY = -0.55;
@@ -259,6 +256,7 @@ void App::keyPress(unsigned char key) {
         loop = true;
         gameover = false;
         score = 0;
+        highscore = 0;
     }
     redraw();
 }
