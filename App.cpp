@@ -84,7 +84,7 @@ void App::loadObstacles() {
 	for (int i = 0; i < 2; i++) {
 		obstacles.push_back(new Triangle(7.5 + (0.1*i), -0.5 + (0.1*i)));
 	}
-	obstacles.push_back(new Enemy(7.6, -.5));
+	obstacles.push_back(new Obstacle(7.6, -.5));
 
 	for (int i = 0; i < 2; i++) {
 		obstacles.push_back(new Triangle(7.6+ (0.1*i), -0.4 + (-0.1*i)));

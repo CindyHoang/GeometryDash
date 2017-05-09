@@ -27,7 +27,7 @@ public:
     Powerup(float xx = 0, float yy = 0, int tt = 0, float ww = 0.05, float hh = 0.05) : x(xx), y(yy), type(tt), w(ww), h(hh) {
         if (type == 1) {
             r = 1;
-            g = 1;
+            g = 0;
             b = 1;
         }
         else {
