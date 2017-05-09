@@ -37,7 +37,8 @@ class App: public GlutApp {
     float score;
     float highscore;
     float delay;
-    
+	float speed;
+
     vector<Obstacle*> obstacles;
     vector<Powerup*> powerups;
     
