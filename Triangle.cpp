@@ -23,3 +23,9 @@ void Triangle::draw() {
 bool Triangle::isLand() {
     return false;
 }
+
+bool Triangle::contains(float xx, float yy) {
+    if ((x >= xx && x < xx+0.1f && y >= yy && y-0.1f < yy))
+        return true;
+    return false;
+}

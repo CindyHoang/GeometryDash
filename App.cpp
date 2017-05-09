@@ -29,22 +29,24 @@ void drawString (void * font, char * s, float x, float y, float z) {
 }
 
 void App::loadObstacles() {
-    obstacles.push_back(new Obstacle(0.5, -0.5));
-    obstacles.push_back(new Triangle(0.7, -0.5));
+//    obstacles.push_back(new Obstacle(0.5, -0.5));
+//    obstacles.push_back(new Triangle(0.7, -0.5));
 //    for (int i = 0; i < 20; i++) {
 //        obstacles.push_back(new Obstacle(0.7+(0.2*i), -0.5+(0.1*i)));
 //    }
+    
+    obstacles.push_back(new Triangle(0.5, -0.5));
 //    for (int i = 0; i < 5; i++) {
 //        obstacles.push_back(new Obstacle(0.5+(0.1*i), -0.5));
 //    }
 //    for (int i = 0; i < 5; i++) {
-//        obstacles.push_back(new Obstacle(1.2+(0.1*i), -0.3));
+//        obstacles.push_back(new Obstacle(1.2+(0.1*i), -0.4));
 //    }
 //    powerups.push_back(new Powerup(0.7, -0.4));
 //    powerups.push_back(new Powerup(1.5, -0.2, 1));
-//    for (int i = 0; i < 5; i++) {
-//        obstacles.push_back(new Obstacle(1.9+(0.1*i), -0.5));
-//    }
+    for (int i = 0; i < 5; i++) {
+        obstacles.push_back(new Obstacle(1.9+(0.1*i), -0.5));
+    }
 //    for (int i = 0; i < 5; i++) {
 //        obstacles.push_back(new Obstacle(2+(0.1*i), -0.2));
 //    }
@@ -184,6 +186,7 @@ void App::idle() {
 //        else {
 //            jumpHeight = 0.2f;
 //        }
+        
         for (int i = 0; i < obstacles.size(); i++) {
             float x = obstacles[i]->getX();
             
@@ -193,15 +196,31 @@ void App::idle() {
                 break;
             }
             
-            if (obstacles[i]->isLand() && (obstacles[i]->getX() - p->getX() <= p->getS()) && (p->getY() - obstacles[i]->getY() <= p->getS())) {
-                // If the terrain is landable, and the position is correct, we should land
-                hasLanded = true;
-                p->shouldLand = false;
+            if ((!obstacles[i]->passedUser) && (obstacles[i]->getX() <= p->getX() + p->getS()) && (obstacles[i]->getX() > p->getX()) && (p->getY() > obstacles[i]->getY()+0.09f) && (p->getY() <= obstacles[i]->getY()+0.1f)) {
+                if (obstacles[i]->isLand()) {
+                    // If the terrain is landable, and the position is correct, we should land
+                    hasLanded = true;
+                    p->shouldLand = false;
+                }
+                else {
+                    gameover = true;
+                    break;
+                }
             }
             
-            if (x < p->getX()) {
+            if (x+0.1f < p->getX()) {
                 // If the obstacle has passed the player, we should be able to fall
-                p->shouldLand = true;
+//                int k = i + 1;
+//                if (obstacles.size() > k) {
+//                    if (obstacles[i]->getY() != obstacles[k]->getY()) {
+//                        p->shouldLand = true;
+//                        obstacles[i]->passedUser = true;
+//                    }
+//                }
+//                else if (obstacles.size() == 1) {
+                    p->shouldLand = true;
+                    obstacles[i]->passedUser = true;
+//                }
             }
             
             if (p->shouldJump && p->getY() - playerY >= jumpHeight) {
@@ -216,11 +235,22 @@ void App::idle() {
                     hasLanded = false;
                     p->shouldLand = true;
                 }
-                else if (obstacles.size() && p->getY() <= playerY+0.01) {
+                else if (obstacles.size() && p->getY() <= playerY) {
                     hasLanded = true;
                     p->shouldLand = false;
                 }
             }
+            
+//            if (p->shouldJump) {
+//                hasLanded = false;
+//                p->setY(p->getY() + 0.0005f);
+//            }
+//            else if (p->shouldLand) {
+//                if (p->getY() > -0.5) {
+//                    hasLanded = false;
+//                    p->setY(p->getY() - 0.0005f);
+//                }
+//            }
  
             obstacles[i]->setX(x - 0.01f);
             score += 0.01;
@@ -246,7 +276,7 @@ void App::idle() {
             }
             
         }
-        
+    
         if (p->shouldJump) {
             hasLanded = false;
             p->setY(p->getY() + 0.01f);
@@ -257,7 +287,7 @@ void App::idle() {
                 p->setY(p->getY() - 0.01f);
             }
         }
-    
+        
         if (gameover) {
             loop = false;
         }

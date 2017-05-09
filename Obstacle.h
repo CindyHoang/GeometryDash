@@ -24,9 +24,11 @@ class Obstacle {
     bool isLandable;
 public:
     bool missile;
+    bool passedUser;
     Obstacle(float xx = 0, float yy = 0, bool canLand = true, float ww = 0.1, float hh = 0.1, float rr = 1, float gg = 0, float bb = 0) :
         x(xx), y(yy), isLandable(canLand), w(ww), h(hh), r(rr), g(gg), b(bb) {
             missile = false;
+            passedUser = false;
     }
     
     virtual float getX() const { return x; }
@@ -44,7 +46,7 @@ public:
     virtual float getB() const { return b; }
     virtual void setColor(float rr, float gg, float bb) { r = rr; g = gg; b = bb; }
     
-    virtual bool isLand() const { return isLandable; }
+    virtual bool isLand() { return isLandable; }
     virtual bool contains(float x, float y);
     virtual void fire();
     virtual void draw();
