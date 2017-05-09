@@ -116,11 +116,18 @@
   <ItemGroup>
     <ClCompile Include="..\App.cpp" />
     <ClCompile Include="..\app_main.cpp" />
+    <ClCompile Include="..\Enemy.cpp" />
     <ClCompile Include="..\GlutApp.cpp" />
+    <ClCompile Include="..\Obstacle.cpp" />
+    <ClCompile Include="..\Player.cpp" />
+    <ClCompile Include="..\Powerup.cpp" />
+    <ClCompile Include="..\Triangle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\App.h" />
     <ClInclude Include="..\GlutApp.h" />
+    <ClInclude Include="..\Obstacle.h" />
+    <ClInclude Include="..\Player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

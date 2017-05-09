@@ -20,9 +20,3 @@ void Powerup::draw() {
     
     glEnd();
 }
-
-bool Powerup::contains(float xx, float yy) {
-    if (x <= xx+0.1 && x > xx && y <= yy+0.1 && y > yy)
-        return true;
-    return false;
-}

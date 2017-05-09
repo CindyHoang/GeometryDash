@@ -1,0 +1,53 @@
+﻿Build started 5/9/2017 1:37:15 AM.
+     1>Project "C:\Users\thisisrich\Desktop\GeometryDash-master(3)\visualc15\glutapp.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /I../ /I../freeglut /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _VC80_UPGRADE=0x0710 /D _MBCS /Gm- /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"obj\glutapp_Debug\\" /Fd"obj\glutapp_Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt ..\App.cpp
+         App.cpp
+     1>c:\users\thisisrich\desktop\geometrydash-master(3)\app.cpp(22): warning C4305: '=': truncation from 'double' to 'float'
+     1>c:\users\thisisrich\desktop\geometrydash-master(3)\app.cpp(23): warning C4305: '=': truncation from 'double' to 'float'
+     1>c:\users\thisisrich\desktop\geometrydash-master(3)\app.cpp(47): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+     1>c:\users\thisisrich\desktop\geometrydash-master(3)\app.cpp(50): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+     1>c:\users\thisisrich\desktop\geometrydash-master(3)\app.cpp(53): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+     1>c:\users\thisisrich\desktop\geometrydash-master(3)\app.cpp(56): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+     1>c:\users\thisisrich\desktop\geometrydash-master(3)\app.cpp(59): warning C4305: 'argument': truncation from 'double' to 'float'
+     1>c:\users\thisisrich\desktop\geometrydash-master(3)\app.cpp(59): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+     1>c:\users\thisisrich\desktop\geometrydash-master(3)\app.cpp(62): warning C4305: 'argument': truncation from 'double' to 'float'
+     1>c:\users\thisisrich\desktop\geometrydash-master(3)\app.cpp(62): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+     1>c:\users\thisisrich\desktop\geometrydash-master(3)\app.cpp(65): warning C4305: 'argument': truncation from 'double' to 'float'
+     1>c:\users\thisisrich\desktop\geometrydash-master(3)\app.cpp(65): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+     1>c:\users\thisisrich\desktop\geometrydash-master(3)\app.cpp(68): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+     1>c:\users\thisisrich\desktop\geometrydash-master(3)\app.cpp(103): warning C4305: 'argument': truncation from 'double' to 'float'
+     1>c:\users\thisisrich\desktop\geometrydash-master(3)\app.cpp(104): warning C4305: 'argument': truncation from 'double' to 'float'
+     1>c:\users\thisisrich\desktop\geometrydash-master(3)\app.cpp(105): warning C4305: 'argument': truncation from 'double' to 'float'
+     1>c:\users\thisisrich\desktop\geometrydash-master(3)\app.cpp(106): warning C4305: 'argument': truncation from 'double' to 'float'
+     1>c:\users\thisisrich\desktop\geometrydash-master(3)\app.cpp(117): warning C4018: '<': signed/unsigned mismatch
+     1>c:\users\thisisrich\desktop\geometrydash-master(3)\app.cpp(126): warning C4018: '<': signed/unsigned mismatch
+     1>c:\users\thisisrich\desktop\geometrydash-master(3)\app.cpp(132): warning C4305: 'argument': truncation from 'double' to 'float'
+     1>c:\users\thisisrich\desktop\geometrydash-master(3)\app.cpp(133): warning C4305: 'argument': truncation from 'double' to 'float'
+     1>c:\users\thisisrich\desktop\geometrydash-master(3)\app.cpp(113): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+         c:\program files (x86)\windows kits\10\include\10.0.10150.0\ucrt\stdio.h(1769): note: see declaration of 'sprintf'
+     1>c:\users\thisisrich\desktop\geometrydash-master(3)\app.cpp(189): warning C4305: '=': truncation from 'double' to 'float'
+     1>c:\users\thisisrich\desktop\geometrydash-master(3)\app.cpp(190): warning C4305: '=': truncation from 'double' to 'float'
+     1>c:\users\thisisrich\desktop\geometrydash-master(3)\app.cpp(206): warning C4305: '=': truncation from 'double' to 'float'
+     1>c:\users\thisisrich\desktop\geometrydash-master(3)\app.cpp(207): warning C4305: '=': truncation from 'double' to 'float'
+     1>c:\users\thisisrich\desktop\geometrydash-master(3)\app.cpp(237): warning C4018: '<': signed/unsigned mismatch
+     1>c:\users\thisisrich\desktop\geometrydash-master(3)\app.cpp(297): warning C4305: '+=': truncation from 'double' to 'float'
+     1>c:\users\thisisrich\desktop\geometrydash-master(3)\app.cpp(305): warning C4305: '=': truncation from 'double' to 'float'
+     1>c:\users\thisisrich\desktop\geometrydash-master(3)\app.cpp(306): warning C4305: '=': truncation from 'double' to 'float'
+     1>c:\users\thisisrich\desktop\geometrydash-master(3)\app.cpp(316): warning C4018: '<': signed/unsigned mismatch
+     1>c:\users\thisisrich\desktop\geometrydash-master(3)\app.cpp(352): warning C4018: '<': signed/unsigned mismatch
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"obj\glutapp_Debug\glutapp.exe" /NOLOGO ../freeglut/freeglut.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"obj\glutapp_Debug\glutapp.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE:NO /IMPLIB:"obj\glutapp_Debug\glutapp.lib" /MACHINE:X86 /SAFESEH obj\glutapp_Debug\App.obj
+         obj\glutapp_Debug\app_main.obj
+         obj\glutapp_Debug\Enemy.obj
+         obj\glutapp_Debug\GlutApp.obj
+         obj\glutapp_Debug\Obstacle.obj
+         obj\glutapp_Debug\Player.obj
+         obj\glutapp_Debug\Powerup.obj
+         obj\glutapp_Debug\Triangle.obj
+         glutapp.vcxproj -> C:\Users\thisisrich\Desktop\GeometryDash-master(3)\visualc15\obj\glutapp_Debug\glutapp.exe
+     1>Done Building Project "C:\Users\thisisrich\Desktop\GeometryDash-master(3)\visualc15\glutapp.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.90

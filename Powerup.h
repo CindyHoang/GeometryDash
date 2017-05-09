@@ -21,15 +21,28 @@ class Powerup {
     float x, y;
     float w, h;
     float r, g, b;
+    int type;
+    
 public:
-    Powerup(float xx = 0, float yy = 0, float ww = 0.05, float hh = 0.05, float rr = 0, float gg = 0, float bb = 1) : x(xx), y(yy), w(ww), h(hh), r(rr), g(gg), b(bb) {
-        
+    Powerup(float xx = 0, float yy = 0, int tt = 0, float ww = 0.05, float hh = 0.05) : x(xx), y(yy), type(tt), w(ww), h(hh) {
+        if (type == 1) {
+            r = 1;
+            g = 1;
+            b = 1;
+        }
+        else {
+            r = 0;
+            g = 1;
+            b = 1;
+        }
     }
     
     float getX() const { return x; }
     float getY() const { return y; }
     void setX(float xx) { x = xx; }
     void setY(float yy) { y = yy; }
+    
+    int getType() const { return type; }
     
     float getW() const { return w; }
     float getH() const { return h; }
@@ -42,7 +55,6 @@ public:
     void setColor(float rr, float gg, float bb) { r = rr; g = gg; b = bb; }
     
     virtual void draw();
-    virtual bool contains(float x, float y);
     virtual ~Powerup() {}
 };
 

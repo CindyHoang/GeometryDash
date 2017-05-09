@@ -21,12 +21,6 @@ void Obstacle::draw() {
     glEnd();
 }
 
-bool Obstacle::contains(float xx, float yy) {
-    if ((x >= xx && x < xx+0.1f && y >= yy && y-0.1f < yy))
-        return true;
+bool Obstacle::canFire() {
     return false;
-}
-
-void Obstacle::fire() {
-	missle = true; 
 }

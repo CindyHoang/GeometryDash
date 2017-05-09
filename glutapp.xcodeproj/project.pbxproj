@@ -13,6 +13,8 @@
 		1799B7E51E5E3A83006D7CBD /* GlutApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1799B7E31E5E3A83006D7CBD /* GlutApp.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
 		1799B7E81E5ECD67006D7CBD /* App.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1799B7E61E5ECD67006D7CBD /* App.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
 		37579D081EBFDC11006FC3E2 /* Powerup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37579D071EBFDC11006FC3E2 /* Powerup.cpp */; };
+		37579D0B1EBFFE5A006FC3E2 /* Triangle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37579D0A1EBFFE5A006FC3E2 /* Triangle.cpp */; };
+		37579D0F1EC18516006FC3E2 /* Enemy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37579D0E1EC18516006FC3E2 /* Enemy.cpp */; };
 		37AFADA21EBA956B00772DFF /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37AFADA11EBA956B00772DFF /* Player.cpp */; };
 		37AFADA51EBADA5300772DFF /* Obstacle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37AFADA31EBADA5300772DFF /* Obstacle.cpp */; };
 /* End PBXBuildFile section */
@@ -40,6 +42,10 @@
 		1799B7E71E5ECD67006D7CBD /* App.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = App.h; sourceTree = "<group>"; };
 		37579D071EBFDC11006FC3E2 /* Powerup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Powerup.cpp; sourceTree = "<group>"; };
 		37579D091EBFDC1D006FC3E2 /* Powerup.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Powerup.h; sourceTree = "<group>"; };
+		37579D0A1EBFFE5A006FC3E2 /* Triangle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Triangle.cpp; sourceTree = "<group>"; };
+		37579D0C1EBFFE6D006FC3E2 /* Triangle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Triangle.h; sourceTree = "<group>"; };
+		37579D0D1EC18509006FC3E2 /* Enemy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Enemy.h; sourceTree = "<group>"; };
+		37579D0E1EC18516006FC3E2 /* Enemy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Enemy.cpp; sourceTree = "<group>"; };
 		37AFADA01EB6FE5F00772DFF /* Player.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		37AFADA11EBA956B00772DFF /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
 		37AFADA31EBADA5300772DFF /* Obstacle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Obstacle.cpp; sourceTree = "<group>"; };
@@ -70,6 +76,10 @@
 				37AFADA01EB6FE5F00772DFF /* Player.h */,
 				37AFADA31EBADA5300772DFF /* Obstacle.cpp */,
 				37AFADA61EBADA6B00772DFF /* Obstacle.h */,
+				37579D0D1EC18509006FC3E2 /* Enemy.h */,
+				37579D0E1EC18516006FC3E2 /* Enemy.cpp */,
+				37579D0A1EBFFE5A006FC3E2 /* Triangle.cpp */,
+				37579D0C1EBFFE6D006FC3E2 /* Triangle.h */,
 				37579D071EBFDC11006FC3E2 /* Powerup.cpp */,
 				37579D091EBFDC1D006FC3E2 /* Powerup.h */,
 				1799B7E31E5E3A83006D7CBD /* GlutApp.cpp */,
@@ -143,9 +153,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37579D0F1EC18516006FC3E2 /* Enemy.cpp in Sources */,
 				37AFADA21EBA956B00772DFF /* Player.cpp in Sources */,
 				37AFADA51EBADA5300772DFF /* Obstacle.cpp in Sources */,
 				1799B7E81E5ECD67006D7CBD /* App.cpp in Sources */,
+				37579D0B1EBFFE5A006FC3E2 /* Triangle.cpp in Sources */,
 				173FEF0C1AA63AC4006CCB85 /* app_main.cpp in Sources */,
 				37579D081EBFDC11006FC3E2 /* Powerup.cpp in Sources */,
 				1799B7E51E5E3A83006D7CBD /* GlutApp.cpp in Sources */,
