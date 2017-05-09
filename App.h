@@ -2,6 +2,8 @@
 #define App_hpp
 
 #include "GlutApp.h"
+#include "TextureRect.h"
+#include "RgbImage.h"
 #include "Player.h"
 #include "Powerup.h"
 #include "Obstacle.h"
@@ -51,6 +53,11 @@ public:
     void mouseDrag(float x, float y);
     
     void idle();
+    
+    GLuint loadTexture(const char* name);
+    GLuint wall;
+    
+    TextureRect* bg;
     
     ~App();
 };

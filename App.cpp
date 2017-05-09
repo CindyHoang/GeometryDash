@@ -20,6 +20,14 @@ App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w,
     
     missileX = 0.74;
     missileY = -0.55;
+    
+#if defined WIN32
+    wall = loadTexture("..\\bg.bmp");
+#else
+    wall = loadTexture("bg.bmp");
+#endif
+    
+    bg = new TextureRect(-1, 1, 2, 2);
 }
 
 void drawString (void * font, char * s, float x, float y, float z) {
@@ -82,6 +90,25 @@ void App::loadObstacles() {
 //        obstacles.push_back(new Obstacle(2+(0.1*i), -0.2));
 //    }
 }
+
+GLuint App::loadTexture(const char *filename) {
+    GLuint texture_id;
+    glClearColor (0.0, 0.0, 0.0, 0.0);
+    glShadeModel(GL_FLAT);
+    glEnable(GL_DEPTH_TEST);
+    
+    RgbImage theTexMap( filename );
+    
+    glGenTextures( 1, &texture_id );
+    glBindTexture( GL_TEXTURE_2D, texture_id );
+    
+    gluBuild2DMipmaps(GL_TEXTURE_2D, 3, theTexMap.GetNumCols(), theTexMap.GetNumRows(),
+                      GL_RGB, GL_UNSIGNED_BYTE, theTexMap.ImageData() );
+    
+    return texture_id;
+    
+}
+
 void App::draw() {
 
     // Clear the screen
@@ -101,6 +128,10 @@ void App::draw() {
         if (gameover) {
             drawString(GLUT_BITMAP_HELVETICA_18, "Gameover :(", -0.175, 0, 0);
             drawString(GLUT_BITMAP_HELVETICA_12, "Press 'r' to restart the game", -0.25, -0.1, 0);
+            
+            glBindTexture(GL_TEXTURE_2D, wall);
+            bg->draw();
+            glDisable(GL_TEXTURE_2D);
         }
         
         else {
@@ -123,12 +154,18 @@ void App::draw() {
             for (int i = 0; i < powerups.size(); i++) {
                 powerups[i]->draw();
             }
+
         }
     }
     else {
         drawString(GLUT_BITMAP_HELVETICA_18, "Geometry Dash", -0.2, 0, 0);
         drawString(GLUT_BITMAP_HELVETICA_12, "Press any key to begin", -0.2, -0.1, 0);
+        
+        glBindTexture(GL_TEXTURE_2D, wall);
+        bg->draw();
+        glDisable(GL_TEXTURE_2D);
     }
+    
     // We have been drawing everything to the back buffer
     // Swap the buffers to see the result of what we drew
     glFlush();

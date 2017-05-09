@@ -15,6 +15,8 @@
 		37579D081EBFDC11006FC3E2 /* Powerup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37579D071EBFDC11006FC3E2 /* Powerup.cpp */; };
 		37579D0B1EBFFE5A006FC3E2 /* Triangle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37579D0A1EBFFE5A006FC3E2 /* Triangle.cpp */; };
 		37579D0F1EC18516006FC3E2 /* Enemy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37579D0E1EC18516006FC3E2 /* Enemy.cpp */; };
+		37579D151EC20174006FC3E2 /* TextureRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37579D141EC20174006FC3E2 /* TextureRect.cpp */; };
+		37579D171EC202DE006FC3E2 /* RgbImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37579D161EC202DE006FC3E2 /* RgbImage.cpp */; };
 		37AFADA21EBA956B00772DFF /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37AFADA11EBA956B00772DFF /* Player.cpp */; };
 		37AFADA51EBADA5300772DFF /* Obstacle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37AFADA31EBADA5300772DFF /* Obstacle.cpp */; };
 /* End PBXBuildFile section */
@@ -46,6 +48,10 @@
 		37579D0C1EBFFE6D006FC3E2 /* Triangle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Triangle.h; sourceTree = "<group>"; };
 		37579D0D1EC18509006FC3E2 /* Enemy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Enemy.h; sourceTree = "<group>"; };
 		37579D0E1EC18516006FC3E2 /* Enemy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Enemy.cpp; sourceTree = "<group>"; };
+		37579D131EC20163006FC3E2 /* TextureRect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextureRect.h; sourceTree = "<group>"; };
+		37579D141EC20174006FC3E2 /* TextureRect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextureRect.cpp; sourceTree = "<group>"; };
+		37579D161EC202DE006FC3E2 /* RgbImage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RgbImage.cpp; sourceTree = "<group>"; };
+		37579D181EC202E5006FC3E2 /* RgbImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RgbImage.h; sourceTree = "<group>"; };
 		37AFADA01EB6FE5F00772DFF /* Player.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		37AFADA11EBA956B00772DFF /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
 		37AFADA31EBADA5300772DFF /* Obstacle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Obstacle.cpp; sourceTree = "<group>"; };
@@ -82,8 +88,12 @@
 				37579D0C1EBFFE6D006FC3E2 /* Triangle.h */,
 				37579D071EBFDC11006FC3E2 /* Powerup.cpp */,
 				37579D091EBFDC1D006FC3E2 /* Powerup.h */,
+				37579D131EC20163006FC3E2 /* TextureRect.h */,
+				37579D141EC20174006FC3E2 /* TextureRect.cpp */,
 				1799B7E31E5E3A83006D7CBD /* GlutApp.cpp */,
 				1799B7E41E5E3A83006D7CBD /* GlutApp.h */,
+				37579D161EC202DE006FC3E2 /* RgbImage.cpp */,
+				37579D181EC202E5006FC3E2 /* RgbImage.h */,
 				173FEF0B1AA63AC4006CCB85 /* app_main.cpp */,
 				173FEF021AA63A07006CCB85 /* Products */,
 			);
@@ -153,6 +163,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37579D151EC20174006FC3E2 /* TextureRect.cpp in Sources */,
+				37579D171EC202DE006FC3E2 /* RgbImage.cpp in Sources */,
 				37579D0F1EC18516006FC3E2 /* Enemy.cpp in Sources */,
 				37AFADA21EBA956B00772DFF /* Player.cpp in Sources */,
 				37AFADA51EBADA5300772DFF /* Obstacle.cpp in Sources */,
