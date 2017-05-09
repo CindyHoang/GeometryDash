@@ -8,6 +8,8 @@ App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w,
     
     p = new Player(-0.5f, -0.5f);
 	e = new Obstacle(0.0f, -0.4f, 1, .1f, 0.01f, 1.0f, 0.0f, 1.0f);
+	
+
     
     welcome = 0;
     
@@ -39,7 +41,7 @@ void App::loadObstacles() {
         obstacles.push_back(new Obstacle(1.0+(0.1*i), -0.3));
     }
 	for (int i = 0; i < 5; i++) {
-		obstacles.push_back(new Obstacle(1.6 + (0.1*i), -0.3));
+		obstacles.push_back(new Obstacle(1.7 + (0.1*i), -0.3));
 	}
 	for (int i = 0; i < 5; i++) {
 		obstacles.push_back(new Obstacle(2.3 + (0.1*i), -0.5));
@@ -230,7 +232,7 @@ void App::idle() {
                 obstacles.erase(obstacles.begin());
             }
         }
-        
+		e = new Obstacle(missleX-0.015f, missleY-0.05f, 1, .1f, 0.01f, 1.0f, 0.0f, 1.0f);
 		//enemies
 		for (int i = 0; i < enemy.size(); i++) {
 			float x = enemy[i]->getX();
@@ -240,20 +242,18 @@ void App::idle() {
 
 			if (e->missle) {
 				missleX = enemy[i]->getX();
-				missleY = enemy[i]->getY() - .5f;
+				missleY = enemy[i]->getY();
 				e->fire();
-				cout << missleY << endl;
+				cout << missleX<< "and " << missleY << endl;
+				cout << x << " OR " << y << endl;
 			}
-			if (enemy[i]->missle) {
-				missleX += -.018f;
-
-			}
+			
 			if (missleX > -1) {
 				e->missle = false;
 			}
 			else
 				e->fire();
-
+		
 			if (e->contains(p->getX(), p->getY())) {
 				gameover = true;
 				break;
@@ -289,7 +289,12 @@ void App::idle() {
 			}
 
 			enemy[i]->setX(x - 0.01f);
-			e->setX(missleX - 0.001f);
+		
+			e->setX(missleX - 0.03f);
+			
+			if (enemy[i]->missle) {
+				missleX += -.018f;
+			}
 
 			if (x < -1) {
 				// Delete obstacle once it goes off the screen
